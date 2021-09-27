@@ -5,13 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.textfield.TextInputEditText
 import com.mvvm.R
+import com.mvvm.ui.book.details.BookDetailsFragment
 import com.mvvm.ui.common.widget.BookSearchResultsAdapter
 
 // TODO: Rename parameter arguments, choose names that match
@@ -37,13 +39,20 @@ class BookSearchFragment : Fragment() {
         adapter = BookSearchResultsAdapter()
         viewModel = ViewModelProvider(this).get(BookSearchViewModel::class.java)
         viewModel!!.init()
-        viewModel!!.getVolumesResponseLiveData()!!.observe(this,
-            {
-                    volumesResponse ->
-                    if (volumesResponse != null) {
-                        volumesResponse.items?.let { adapter!!.setResults(it) }
-                    }
-            })
+        viewModel!!.getVolumesResponseLiveData()!!.observe(this
+        ) { volumesResponse ->
+            if (volumesResponse != null) {
+                volumesResponse.items?.let {
+                    adapter!!.setResults(it)
+
+                }
+            }
+        }
+        adapter!!.setItemClickListener {
+            val viewHolder = it!!.tag as RecyclerView.ViewHolder
+            Toast.makeText(context, ""+viewHolder.adapterPosition, Toast.LENGTH_LONG).show()
+            findNavController().navigate(R.id.action_bookSearchFragment_to_bookDetailsFragment2)
+        }
     }
 
     override fun onCreateView(
@@ -56,6 +65,7 @@ class BookSearchFragment : Fragment() {
             view.findViewById(R.id.fragment_booksearch_searchResultsRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
+//        recyclerView.onIte
         keywordEditText = view.findViewById(R.id.fragment_booksearch_keyword)
         authorEditText = view.findViewById(R.id.fragment_booksearch_author)
         searchButton = view.findViewById(R.id.fragment_booksearch_search) as Button

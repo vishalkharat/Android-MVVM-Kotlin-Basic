@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mvvm.R
 import com.mvvm.data.model.api1.Volume
-import java.util.*
 
 class BookSearchResultsAdapter:
     RecyclerView.Adapter<BookSearchResultsAdapter.BookSearchResultHolder>() {
@@ -40,6 +39,13 @@ class BookSearchResultsAdapter:
         }
     }
 
+    private var onItemClickListener: View.OnClickListener? = null
+
+    fun setItemClickListener(clickListener: View.OnClickListener?) {
+        onItemClickListener = clickListener
+    }
+
+
     override fun getItemCount(): Int {
         return results.size
     }
@@ -49,7 +55,7 @@ class BookSearchResultsAdapter:
         notifyDataSetChanged()
     }
 
-    class BookSearchResultHolder(itemView: View) :
+    inner class BookSearchResultHolder(itemView: View) :
         RecyclerView.ViewHolder(itemView) {
         val titleTextView: TextView
         val authorsTextView: TextView
@@ -61,6 +67,8 @@ class BookSearchResultsAdapter:
             authorsTextView = itemView.findViewById(R.id.book_item_authors)
             publishedDateTextView = itemView.findViewById(R.id.book_item_publishedDate)
             smallThumbnailImageView = itemView.findViewById(R.id.book_item_smallThumbnail)
+            itemView.setTag(this);
+            itemView.setOnClickListener(onItemClickListener)
         }
     }
 }

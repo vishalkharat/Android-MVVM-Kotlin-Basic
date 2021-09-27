@@ -9,6 +9,15 @@
         android:id="@+id/bookSearchFragment"
         android:name="com.mvvm.ui.book.BookSearchFragment"
         android:label="fragment_book_search"
-        tools:layout="@layout/fragment_book_search" />
+        tools:layout="@layout/fragment_book_search" >
+        <action
+            android:id="@+id/action_bookSearchFragment_to_bookDetailsFragment2"
+            app:destination="@id/bookDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookDetailsFragment"
+        android:name="com.mvvm.ui.book.details.BookDetailsFragment"
+        android:label="fragment_book_details"
+        tools:layout="@layout/fragment_book_details" />
 
 </navigation>
