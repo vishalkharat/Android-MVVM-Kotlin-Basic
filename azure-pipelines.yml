@@ -11,8 +11,6 @@ pool:
 
 steps:
 - task: Gradle@2
-- task: AppCenterDistribute@3
-  
   inputs:
     workingDirectory: ''
     gradleWrapperFile: 'gradlew'
@@ -21,11 +19,12 @@ steps:
     testResultsFiles: '**/TEST-*.xml'
     tasks: 'assembleDebug'
 
-# inputs:
-#     serverEndpoint: 'AzureDevOps'
-#     appSlug: 'Vishal.Kharat_Extentia/AzureDevOps'
-#     appFile: '/app/build/outputs/apk/debug'
-#     buildVersion: '1'
-#     symbolsOption: 'Android'
-#     releaseNotesOption: 'input'
-#     destinationType: 'groups'
+- task: AppCenterDistribute@3
+  inputs:
+    serverEndpoint: 'AzureDevOps'
+    appSlug: 'Vishal.Kharat_Extentia/AzureDevOps'
+    appFile: '/app/build/outputs/apk/debug'
+    buildVersion: '1'
+    symbolsOption: 'Android'
+    releaseNotesOption: 'input'
+    destinationType: 'groups'
