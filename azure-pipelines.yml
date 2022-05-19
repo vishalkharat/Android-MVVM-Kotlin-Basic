@@ -23,8 +23,7 @@ steps:
   inputs:
     serverEndpoint: 'AzureDevOps'
     appSlug: 'Vishal.Kharat_Extentia/AzureDevOps'
-    appFile: '/app/build/outputs/apk/debug'
+    appFile: '**/app/build/outputs/apk/debug'
     buildVersion: '1'
     symbolsOption: 'Android'
-    releaseNotesOption: 'input'
     destinationType: 'groups'
