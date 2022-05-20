@@ -22,13 +22,14 @@ steps:
 - task: AppCenterDistribute@3
   inputs:
     serverEndpoint: 'AzureDevOps'
-    appSlug: 'https://appcenter.ms/users/Vishal.Kharat_Extentia/apps/AzureDevOps'
+    appSlug: 'Vishal.Kharat_Extentia/AzureDevOps'
     appFile: '**/app/build/outputs/apk/debug'
     buildVersion: '1.2'
     symbolsOption: 'Android'
     releaseNotesOption: 'input'
     releaseNotesInput: 'Test'
     destinationType: 'groups'
+    distributionGroupId: '51439a9c-5039-4113-87f9-2f56f0aaa8ac'
 
 # - task: AppCenterDistribute@3
 #   inputs:
