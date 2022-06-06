@@ -13,7 +13,7 @@ parameters:
   - name: appCenterServiceConnection
     displayName: 'App Center Integration for Sample App'
   - name: appSlug
-    displayName: 'https://appcenter.ms/users/Vishal.Kharat_Extentia/apps/AzureDevOps'
+    displayName: 'Vishal.Kharat_Extentia/AzureDevOps'
   - name: appFile
     displayName: '**/*.apk'
   - name: releaseNotes
