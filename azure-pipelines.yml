@@ -12,12 +12,18 @@ pool:
 parameters:
   - name: appCenterServiceConnection
     displayName: 'App Center Integration for Sample App'
+    default: 'App Center Integration for Sample App'
   - name: appSlug
     displayName: 'Vishal.Kharat_Extentia/AzureDevOps'
+    default: 'Vishal.Kharat_Extentia/AzureDevOps'
+
   - name: appFile
     displayName: '**/*.apk'
+    default: '**/*.apk'
+
   - name: releaseNotes
     displayName: 'Release notes'
+    default: 'Release notes'
 
 
 steps:
