@@ -26,7 +26,17 @@ parameters:
     default: 'Release notes'
 
 
+
 steps:
+- task: SonarQubePrepare@5
+  inputs:
+    SonarQube: 'AzureSonarQube'
+    scannerMode: 'Other'
+    extraProperties: |
+      # Additional properties that will be passed to the scanner,
+      # Put one key=value per line, example:
+      # sonar.exclusions=**/*.bin
+      sonar.projectKey=CertTest_CertTest_AYE86gAZmAvV1x1zGDqP
 - task: Gradle@2
   inputs:
     workingDirectory: ''
