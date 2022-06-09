@@ -51,18 +51,18 @@ steps:
 #       # Put one key=value per line, example:
 #       # sonar.exclusions=**/*.bin
 #       sonar.projectKey=CertTest_CertTest_AYE86gAZmAvV1x1zGDqP
-# - task: Gradle@3
-#   inputs:
-#     gradleWrapperFile: 'gradlew'
-#     tasks: 'build'
-#     publishJUnitResults: true
-#     testResultsFiles: '**/TEST-*.xml'
-#     javaHomeOption: 'JDKVersion'
-#     sonarQubeRunAnalysis: true
-#     sqGradlePluginVersionChoice: 'specify'
-#     sonarQubeGradlePluginVersion: '2.6.1'
-#     checkStyleRunAnalysis: true
-#     spotBugsAnalysis: false
+- task: Gradle@3
+  inputs:
+    gradleWrapperFile: 'gradlew'
+    tasks: 'build'
+    publishJUnitResults: true
+    testResultsFiles: '**/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    sonarQubeRunAnalysis: true
+    sqGradlePluginVersionChoice: 'specify'
+    sonarQubeGradlePluginVersion: '2.6.1'
+    checkStyleRunAnalysis: true
+    spotBugsAnalysis: false
 - task: Gradle@2
   inputs:
     workingDirectory: ''
