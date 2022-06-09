@@ -10,7 +10,7 @@ object RetrofitService {
 
     private val BOOK_SEARCH_SERVICE_BASE_URL = "https://www.googleapis.com/"
 
-    private val retrofit: Retrofit
+    private var retrofit: Retrofit
 
     init {
         val interceptor = HttpLoggingInterceptor()
@@ -18,6 +18,12 @@ object RetrofitService {
         val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
         retrofit = Retrofit.Builder()
         .baseUrl(BOOK_SEARCH_SERVICE_BASE_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+        interceptor.level = HttpLoggingInterceptor.Level.BODY
+        retrofit = Retrofit.Builder()
+            .baseUrl(BOOK_SEARCH_SERVICE_BASE_URL)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

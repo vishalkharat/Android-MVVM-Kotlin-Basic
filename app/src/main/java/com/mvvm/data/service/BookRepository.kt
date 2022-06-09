@@ -49,6 +49,109 @@ class BookRepository {
             })
     }
 
+    fun searchVolumes1(keyword: String?, author: String?) {
+        bookSearchService?.searchVolumes(keyword, author)
+            ?.enqueue(object : Callback<VolumesResponse?> {
+                override fun onResponse(
+                    call: Call<VolumesResponse?>,
+                    response: Response<VolumesResponse?>
+                ) {
+                    if (response.body() != null) {
+                        volumesResponseLiveData!!.postValue(response.body())
+                    }
+                }
+
+                override fun onFailure(call: Call<VolumesResponse?>, t: Throwable) {
+                    volumesResponseLiveData!!.postValue(null)
+                }
+            })
+
+
+        bookSearchService?.searchVolumes(keyword, author)
+            ?.enqueue(object : Callback<VolumesResponse?> {
+                override fun onResponse(
+                    call: Call<VolumesResponse?>,
+                    response: Response<VolumesResponse?>
+                ) {
+                    if (response.body() != null) {
+                        volumesResponseLiveData!!.postValue(response.body())
+                    }
+                }
+
+                override fun onFailure(call: Call<VolumesResponse?>, t: Throwable) {
+                    volumesResponseLiveData!!.postValue(null)
+                }
+            })
+
+
+        bookSearchService?.searchVolumes(keyword, author)
+            ?.enqueue(object : Callback<VolumesResponse?> {
+                override fun onResponse(
+                    call: Call<VolumesResponse?>,
+                    response: Response<VolumesResponse?>
+                ) {
+                    if (response.body() != null) {
+                        volumesResponseLiveData!!.postValue(response.body())
+                    }
+                }
+
+                override fun onFailure(call: Call<VolumesResponse?>, t: Throwable) {
+                    volumesResponseLiveData!!.postValue(null)
+                }
+            })
+
+
+        bookSearchService?.searchVolumes(keyword, author)
+            ?.enqueue(object : Callback<VolumesResponse?> {
+                override fun onResponse(
+                    call: Call<VolumesResponse?>,
+                    response: Response<VolumesResponse?>
+                ) {
+                    if (response.body() != null) {
+                        volumesResponseLiveData!!.postValue(response.body())
+                    }
+                }
+
+                override fun onFailure(call: Call<VolumesResponse?>, t: Throwable) {
+                    volumesResponseLiveData!!.postValue(null)
+                }
+            })
+
+
+        bookSearchService?.searchVolumes(keyword, author)
+            ?.enqueue(object : Callback<VolumesResponse?> {
+                override fun onResponse(
+                    call: Call<VolumesResponse?>,
+                    response: Response<VolumesResponse?>
+                ) {
+                    if (response.body() != null) {
+                        volumesResponseLiveData!!.postValue(response.body())
+                    }
+                }
+
+                override fun onFailure(call: Call<VolumesResponse?>, t: Throwable) {
+                    volumesResponseLiveData!!.postValue(null)
+                }
+            })
+
+
+        bookSearchService?.searchVolumes(keyword, author)
+            ?.enqueue(object : Callback<VolumesResponse?> {
+                override fun onResponse(
+                    call: Call<VolumesResponse?>,
+                    response: Response<VolumesResponse?>
+                ) {
+                    if (response.body() != null) {
+                        volumesResponseLiveData!!.postValue(response.body())
+                    }
+                }
+
+                override fun onFailure(call: Call<VolumesResponse?>, t: Throwable) {
+                    volumesResponseLiveData!!.postValue(null)
+                }
+            })
+    }
+
     fun getVolumeDetails(keyword: String?, author: String?) {
         bookSearchService?.getVolumeDetails()
             ?.enqueue(object : Callback<Json4Kotlin_Base?> {
