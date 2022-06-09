@@ -1,5 +1,6 @@
 # Android
 
+
 # Build your Android project with Gradle.
 # Add steps that test, sign, and distribute the APK, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/android
@@ -29,30 +30,39 @@ parameters:
 
 
 steps:
-- task: SonarQubePrepare@5
+- task: SonarCloudPrepare@1
   inputs:
-    SonarQube: 'AzureSonarQube'
+    SonarCloud: 'Sonar Cloud Private'
+    organization: 'kharatvishal'
     scannerMode: 'Other'
     extraProperties: |
       # Additional properties that will be passed to the scanner,
       # Put one key=value per line, example:
       # sonar.exclusions=**/*.bin
-      sonar.projectKey=CertTest_CertTest_AYE86gAZmAvV1x1zGDqP
-- task: Gradle@3
-  inputs:
-    gradleWrapperFile: 'gradlew'
-    tasks: 'build'
-    publishJUnitResults: true
-    testResultsFiles: '**/TEST-*.xml'
-    javaHomeOption: 'JDKVersion'
-    sonarQubeRunAnalysis: true
-    sqGradlePluginVersionChoice: 'specify'
-    sonarQubeGradlePluginVersion: '2.6.1'
-    checkStyleRunAnalysis: true
-    spotBugsAnalysis: false
-- task: SonarQubePublish@5
-  inputs:
-    pollingTimeoutSec: '3000'
+      sonar.projectKey=kharatvishal_CertTest
+      sonar.projectName=CertTest
+- task: SonarCloudAnalyze@1
+# - task: SonarQubePrepare@5
+#   inputs:
+#     SonarQube: 'AzureSonarQube'
+#     scannerMode: 'Other'
+#     extraProperties: |
+#       # Additional properties that will be passed to the scanner,
+#       # Put one key=value per line, example:
+#       # sonar.exclusions=**/*.bin
+#       sonar.projectKey=CertTest_CertTest_AYE86gAZmAvV1x1zGDqP
+# - task: Gradle@3
+#   inputs:
+#     gradleWrapperFile: 'gradlew'
+#     tasks: 'build'
+#     publishJUnitResults: true
+#     testResultsFiles: '**/TEST-*.xml'
+#     javaHomeOption: 'JDKVersion'
+#     sonarQubeRunAnalysis: true
+#     sqGradlePluginVersionChoice: 'specify'
+#     sonarQubeGradlePluginVersion: '2.6.1'
+#     checkStyleRunAnalysis: true
+#     spotBugsAnalysis: false
 - task: Gradle@2
   inputs:
     workingDirectory: ''
@@ -61,6 +71,10 @@ steps:
     publishJUnitResults: false
     testResultsFiles: '**/TEST-*.xml'
     tasks: 'assembleDebug'
+- task: SonarQubePublish@5
+  inputs:
+    pollingTimeoutSec: '3000'
+
 
 
 - task: AppCenterDistribute@3
