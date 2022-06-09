@@ -42,7 +42,7 @@ steps:
       # sonar.exclusions=**/*.bin
       sonar.projectKey=kharatvishal_CertTest
       sonar.projectName=CertTest
-- task: SonarCloudAnalyze@1
+
 # - task: SonarQubePrepare@5
 #   inputs:
 #     SonarQube: 'AzureSonarQube'
@@ -64,14 +64,25 @@ steps:
 #     sonarQubeGradlePluginVersion: '2.6.1'
 #     checkStyleRunAnalysis: true
 #     spotBugsAnalysis: false
-- task: Gradle@2
+# - task: Gradle@2
+#   inputs:
+#     workingDirectory: ''
+#     gradleWrapperFile: 'gradlew'
+#     gradleOptions: '-Xmx3072m'
+#     publishJUnitResults: false
+#     testResultsFiles: '**/TEST-*.xml'
+#     tasks: 'assembleDebug'
+- task: Gradle@3
   inputs:
-    workingDirectory: ''
     gradleWrapperFile: 'gradlew'
-    gradleOptions: '-Xmx3072m'
-    publishJUnitResults: false
-    testResultsFiles: '**/TEST-*.xml'
     tasks: 'assembleDebug'
+    publishJUnitResults: true
+    testResultsFiles: '**/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    sonarQubeRunAnalysis: true
+    sqGradlePluginVersionChoice: 'specify'
+    sonarQubeGradlePluginVersion: '2.6.1'
+    spotBugsAnalysis: false
 - task: SonarCloudPublish@1
   inputs:
     pollingTimeoutSec: '3000'
