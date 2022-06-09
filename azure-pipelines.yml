@@ -1,0 +1,75 @@
+# Android
+
+# Build your Android project with Gradle.
+# Add steps that test, sign, and distribute the APK, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/android
+
+trigger:
+- main
+
+pool:
+  vmImage: 'macos-latest'
+
+parameters:
+  - name: appCenterServiceConnection
+    displayName: 'App Center Integration for Sample App'
+    default: 'App Center Integration for Sample App'
+  - name: appSlug
+    displayName: 'Vishal.Kharat_Extentia/AzureDevOps'
+    default: 'Vishal.Kharat_Extentia/AzureDevOps'
+
+  - name: appFile
+    displayName: '**/*.apk'
+    default: '**/*.apk'
+
+  - name: releaseNotes
+    displayName: 'Release notes'
+    default: 'Release notes'
+
+
+
+steps:
+- task: SonarQubePrepare@5
+  inputs:
+    SonarQube: 'AzureSonarQube'
+    scannerMode: 'Other'
+    extraProperties: |
+      # Additional properties that will be passed to the scanner,
+      # Put one key=value per line, example:
+      # sonar.exclusions=**/*.bin
+      sonar.projectKey=CertTest_CertTest_AYE86gAZmAvV1x1zGDqP
+- task: Gradle@3
+  inputs:
+    gradleWrapperFile: 'gradlew'
+    tasks: 'build'
+    publishJUnitResults: true
+    testResultsFiles: '**/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    sonarQubeRunAnalysis: true
+    sqGradlePluginVersionChoice: 'specify'
+    sonarQubeGradlePluginVersion: '2.6.1'
+    checkStyleRunAnalysis: true
+    spotBugsAnalysis: false
+- task: SonarQubePublish@5
+  inputs:
+    pollingTimeoutSec: '3000'
+- task: Gradle@2
+  inputs:
+    workingDirectory: ''
+    gradleWrapperFile: 'gradlew'
+    gradleOptions: '-Xmx3072m'
+    publishJUnitResults: false
+    testResultsFiles: '**/TEST-*.xml'
+    tasks: 'assembleDebug'
+
+
+- task: AppCenterDistribute@3
+  inputs:
+      serverEndpoint: '${{ parameters.appCenterServiceConnection }}'
+      appSlug: '${{ parameters.appSlug }}'
+      appFile: '${{parameters.appFile}}'
+      symbolsOption: 'Android'
+      destinationType: 'groups'
+      releaseNotesOption: 'input'
+      releaseNotesInput: '${{parameters.releaseNotes}}'
+  displayName: 'Distribute to App Center'
