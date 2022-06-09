@@ -1,5 +1,6 @@
 # Android
 
+
 # Build your Android project with Gradle.
 # Add steps that test, sign, and distribute the APK, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/android
@@ -29,15 +30,27 @@ parameters:
 
 
 steps:
-- task: SonarQubePrepare@5
+- task: SonarCloudPrepare@1
   inputs:
-    SonarQube: 'AzureSonarQube'
+    SonarCloud: 'Sonar Cloud'
+    organization: 'kharatvishalpub'
     scannerMode: 'Other'
     extraProperties: |
       # Additional properties that will be passed to the scanner,
       # Put one key=value per line, example:
       # sonar.exclusions=**/*.bin
-      sonar.projectKey=CertTest_CertTest_AYE86gAZmAvV1x1zGDqP
+      sonar.projectKey=kharatvishalpub_SonarTest
+      sonar.projectName=SonarTest
+# - task: SonarQubePrepare@5
+#   inputs:
+#     SonarQube: 'AzureSonarQube'
+#     scannerMode: 'Other'
+#     extraProperties: |
+#       # Additional properties that will be passed to the scanner,
+#       # Put one key=value per line, example:
+#       # sonar.exclusions=**/*.bin
+#       sonar.projectKey=CertTest_CertTest_AYE86gAZmAvV1x1zGDqP
+- task: SonarCloudAnalyze@1
 - task: Gradle@3
   inputs:
     gradleWrapperFile: 'gradlew'
