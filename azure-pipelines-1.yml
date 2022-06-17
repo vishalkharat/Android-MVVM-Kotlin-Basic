@@ -11,6 +11,15 @@ pool:
   vmImage: 'macos-latest'
 
 steps:
+- task: SonarQubeAnalyze@5
+  inputs:
+    SonarQube: 'ExtentiaSonarServerConnection'
+    scannerMode: 'Other'
+    extraProperties: |
+      # Additional properties that will be passed to the scanner,
+      # Put one key=value per line, example:
+      # sonar.exclusions=**/*.bin
+      sonar.projectKey=YourProjectKey
 - task: Gradle@2
   inputs:
     workingDirectory: ''
@@ -21,15 +30,7 @@ steps:
     tasks: 'assembleDebug'
     
 
-- task: SonarQubeAnalyze@5
-  inputs:
-    SonarQube: 'ExtentiaSonarServerConnection'
-    scannerMode: 'Other'
-    extraProperties: |
-      # Additional properties that will be passed to the scanner,
-      # Put one key=value per line, example:
-      # sonar.exclusions=**/*.bin
-      sonar.projectKey=YourProjectKey
+
 - task: SonarQubePrepare@5
 - task: SonarQubePublish@5
   inputs:
