@@ -10,6 +10,8 @@ trigger:
 pool:
   vmImage: 'macos-latest'
 
+
+
 steps:
 - task: SonarQubeAnalyze@5
   inputs:
@@ -19,7 +21,7 @@ steps:
       # Additional properties that will be passed to the scanner,
       # Put one key=value per line, example:
       # sonar.exclusions=**/*.bin
-      sonar.projectKey=YourProjectKey
+      sonar.projectKey=demo
 - task: Gradle@2
   inputs:
     workingDirectory: ''
