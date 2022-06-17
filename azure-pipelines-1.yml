@@ -1,10 +1,11 @@
 # Android
+
 # Build your Android project with Gradle.
 # Add steps that test, sign, and distribute the APK, save build artifacts, and more:
 # https://docs.microsoft.com/azure/devops/pipelines/languages/android
 
 trigger:
-- main
+- azure-pipelines-extentia-sonar
 
 pool:
   vmImage: 'macos-latest'
@@ -18,3 +19,18 @@ steps:
     publishJUnitResults: false
     testResultsFiles: '**/TEST-*.xml'
     tasks: 'assembleDebug'
+    
+
+- task: SonarQubeAnalyze@5
+  inputs:
+    SonarQube: 'ExtentiaSonarServerConnection'
+    scannerMode: 'Other'
+    extraProperties: |
+      # Additional properties that will be passed to the scanner,
+      # Put one key=value per line, example:
+      # sonar.exclusions=**/*.bin
+      sonar.projectKey=YourProjectKey
+- task: SonarQubePrepare@5
+- task: SonarQubePublish@5
+  inputs:
+    pollingTimeoutSec: '3000'
